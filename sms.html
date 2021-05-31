@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management System</title>
+    <style>
+
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      #cont {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: 100vh;
+      }
+      #form {
+        background-color: teal
+      }
+      #formcontainer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 50px;
+      }
+      input {
+          margin: 10px;
+          margin-left: 30px;
+          outline: none;
+          width: 70%;
+          height: 20px;
+          border-radius: 10px;
+          padding: 10px;
+          font-size: 16px;
+          font-family: sans-serif;
+          border: transparent;
+      }
+      /* input:hover {
+          animation: input 500ms ease-in-out 1 forwards;
+      }
+      @keyframes input {
+          100%{
+              width: 100%;
+              border-radius: 30px;
+              background-color: #999;
+          }
+      } */
+      button {
+          width: 100px;
+          height: 30px;
+          border-radius: 20px;
+          border: transparent;
+          color: white;
+          font-weight: 600;
+          margin-top: 10px;
+      }
+      .remove {
+          background-color: red;
+      }
+      .update {
+          background-color: green;
+      }
+      #add {
+          margin: 30px;
+          outline: none;
+          width: 50%;
+          height: 40px;
+          border-radius: 20px;
+          background-color: blue;
+          color: white;
+          font-weight: 600;
+      }
+      #student {
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        background-color: rgb(245, 203, 140);
+        overflow-y: scroll;
+      }
+      #student > div {
+          display: flex;
+          flex-direction: column;
+          background-color: rgb(226, 228, 129);
+          padding: 15px;
+          border-radius: 15px;
+          box-shadow: 5px 5px 10px greenyellow;
+      }
+      #student > div > div {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 10px;
+      }
+      span {
+        text-align: center;
+        font-size: 30px;
+        margin: 20px;
+        color: white;
+        font-weight: 600;
+        margin-top: 0px;
+      }
+      p {
+        font-size: 20px;
+      }
+      #studImage img {
+          width: 250px;
+          margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <!-- student related information. Name, age, city, contact number.
+   Contact number should not accept more than 10 digits. -->
+  <body>
+    <div id="cont">
+      <div id="form">
+        <div id="formcontainer">
+          <span>Student Management System</span>
+        <label for="name">
+          <input type="text" name="name" id="name" placeholder="Name" />
+        </label>
+        <label for="city">
+          <input type="text" name="city" id="city" placeholder="City"/>
+        </label>
+       
+        <label for="age"
+          >
+          <input type="number" name="age" id="age" placeholder="Age"/>
+        </label>
+        <label for="phnumber"
+          >
+          <input type="tel" name="phNumber" id="phNumber" placeholder="Contact number"/>
+        </label>
+        <label for="image"
+          >
+          <input type="text" name="image" id="studImage" placeholder="Image URL"/>
+        </label>
+       </div>
+       <button id="add" onclick="addStudent()">Add User</button>
+      </div>
+      <div id="student"></div>
+    </div>
+  </body>
+  <script>
+      var id=0;
+      var x =[];
+    function addStudent() {
+        var nam = document.getElementById('name');
+        var city=document.getElementById('city');
+        var age=document.getElementById('age');
+        var phNumber=document.getElementById('phNumber');
+        var image=document.getElementById('studImage');
+
+        var studentDetails={
+            'name':nam.value,
+            'city':city.value,
+            'age':age.value,
+            'phNumber':phNumber.value,
+            'image':image.value
+        };
+        x.push(studentDetails);
+        console.log(x);
+
+        id++;
+        var studentPage=document.getElementById('student');
+        var div = document.createElement('div')
+        div.innerHTML=`<img src='${image.value}'/><p id='${id}'>Name-'${nam.value}'<br>city-'${city.value}'<br>age- ${age.value}<br>phNumber '${phNumber.value}' </p><div><button id='${id}' class="remove" onclick='remover(${id})'>Remove</button><button id='${id}' class="update" onclick='updater(${id})'>Update</button></div>`
+
+        studentPage.append(div);
+    }
+
+     function remover(id){
+            var e = document.getElementById(id);
+            e.parentElement.remove();
+            console.log(id)
+        }
+
+        function updater(id) {
+            var new_name = prompt( ` Enter new name`)
+            
+            var nam=document.getElementById('name');
+            var city=document.getElementById('city');
+            var age=document.getElementById('age');
+            var phNumber=document.getElementById('phNumber');
+            var image=document.getElementById('image');
+            
+            var studentDetails={
+            'name':new_name,
+            'city':city.value,
+            'age':age.value,
+            'phNumber':phNumber.value,
+            'image':image.value
+          };
+          
+          console.log(studentDetails);
+          
+          var update = document.getElementById(id);
+          update.innerHTML = `<p id='${id}'>Name-'${nam.value}'<br>city-'${city.value}'<br>age- &#7266 ${new_age}<br>phNumber '${phNumber.value}'</p>`
+        }
+  </script>
+
+  </html>
+
+
+
+<script>
+    id = 0;
+    function add(){
+        var age = document.getElementById("age")
+        var name = document.getElementById("name")
+        var time = document.getElementById("time")
+        var div =document.createElement("div");
+        id++;
+        div.innerHTML=`<p id= "${id}">${name.value}<br>${age.value}<br><img src="https://via.placeholder.com/70x100"></img><p><br><button id="${id}" onclick="name(${id})">Update Name</button><button id="${id}" onclick="remove(${id})">Remove Student</button>`;
+        task.appendChild(div);
+        
+    }
+    function name(id){
+        var name = document.getElementById("name")
+        var new_namee=  prompt(` Enter new name`);
+        var po = document.getElementById(id);
+        po.innerHTML= `<p id= "${id}">${new_name}<br>${age.value}<br><br><img src="https://via.placeholder.com/70x100"></img><p>`
+    }
